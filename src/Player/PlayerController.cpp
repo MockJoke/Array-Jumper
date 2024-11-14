@@ -45,16 +45,15 @@ namespace Player
 		return player_model->getCurrentPosition();
 	}
 
+	void PlayerController::resetPlayer()
+	{
+		player_model->setCurrentPosition(0);
+		player_model->setPlayerState(PlayerState::ALIVE);
+	}
 
 	void PlayerController::destroy()
 	{
 		delete (player_model);
 		delete (player_view);
-	}
-
-	void PlayerController::resetPlayer()
-	{
-		player_model->setCurrentPosition(0);
-		player_model->setPlayerState(PlayerState::ALIVE);
 	}
 }
