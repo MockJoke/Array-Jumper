@@ -31,7 +31,7 @@ target_include_directories(
 )
 
 # Link required libraries (add sfml-audio and sfml-network if needed)
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system)
 
 # Copy resources folder to the binary output directory
 file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR}/bin)
