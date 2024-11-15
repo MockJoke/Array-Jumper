@@ -3,9 +3,15 @@
 
 namespace Player
 {
-	PlayerService::PlayerService() { player_controller = new PlayerController(); }
+	PlayerService::PlayerService() 
+	{ 
+		player_controller = new PlayerController(); 
+	}
 
-	PlayerService::~PlayerService() { destroy(); }
+	PlayerService::~PlayerService() 
+	{ 
+		destroy(); 
+	}
 
 	void PlayerService::initialize()
 	{
@@ -22,6 +28,23 @@ namespace Player
 		player_controller->render();
 	}
 
+	int PlayerService::getCurrentLives()
+	{
+		return player_controller->getCurrentLives();
+	}
 
-	void PlayerService::destroy() { delete(player_controller); }
+	void PlayerService::takeDamage()
+	{
+		player_controller->takeDamage();
+	}
+
+	void PlayerService::levelComplete() 
+	{ 
+		player_controller->resetPlayer(); 
+	}
+
+	void PlayerService::destroy() 
+	{ 
+		delete(player_controller); 
+	}
 }
