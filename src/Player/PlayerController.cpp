@@ -84,7 +84,7 @@ namespace Player
 	void PlayerController::jump(MovementDirection direction)
 	{
 		int current_position = player_model->getCurrentPosition();
-		BlockType box_value = ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValue(current_position);
+		Level::BlockType box_value = Global::ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValue(current_position);
 		int steps, targetPosition;
 
 		switch (direction)

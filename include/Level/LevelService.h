@@ -12,6 +12,7 @@ namespace Level
 		LevelController* level_controller;
 
 		void destroy();
+
 	public:
 		LevelService();
 		~LevelService();
@@ -24,4 +25,3 @@ namespace Level
 		BlockType getCurrentBoxValue(int currentPosition);
 	};
 }
-
