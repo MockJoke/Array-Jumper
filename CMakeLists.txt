@@ -14,8 +14,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin/)
 add_subdirectory(vendors/sfml/)
 
 # Collect all the source and header files
-file(GLOB ALL_SOURCE_FILES src/*.cpp)
-file(GLOB ALL_HEADER_FILES include/*.h)
+file(GLOB_RECURSE ALL_SOURCE_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE ALL_HEADER_FILES "${CMAKE_SOURCE_DIR}/include/*.h")
 
 # Add the main target.
 add_executable(${PROJECT_NAME} ${ALL_SOURCE_FILES} ${ALL_HEADER_FILES})
@@ -31,7 +31,7 @@ target_include_directories(
 )
 
 # Link required libraries (add sfml-audio and sfml-network if needed)
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system)
 
 # Copy resources folder to the binary output directory
 file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR}/bin)
