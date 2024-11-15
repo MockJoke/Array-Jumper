@@ -37,6 +37,6 @@ namespace Level
 
 	void LevelService::destroy()
 	{
-		delete(level_controller);
+		delete (level_controller);
 	}
 }

@@ -6,7 +6,6 @@
 
 namespace Level
 {
-
 	LevelController::LevelController()
 	{
 		level_view = new LevelView(this);
@@ -39,5 +38,4 @@ namespace Level
 	{
 		return level_model->getCurrentBoxValue(currentPosition);
 	}
-
 }
