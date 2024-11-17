@@ -2,11 +2,6 @@
 
 namespace Main
 {
-	using namespace Graphics;
-	using namespace UI;
-	using namespace Sound;
-	using namespace Global;
-
 	GameState GameService::current_state = GameState::BOOT;
 
 	GameService::GameService()
@@ -19,7 +14,7 @@ namespace Main
 
 	void GameService::ignite()
 	{
-		service_locator = ServiceLocator::getInstance();
+		service_locator = Global::ServiceLocator::getInstance();
 		initialize();
 		showSplashScreen();
 	}
@@ -53,9 +48,18 @@ namespace Main
 		game_window->display();
 	}
 
-	bool GameService::isRunning() { return service_locator->getGraphicService()->isGameWindowOpen(); }
+	bool GameService::isRunning() 
+	{ 
+		return service_locator->getGraphicService()->isGameWindowOpen(); 
+	}
 
-	void GameService::setGameState(GameState new_state) { current_state = new_state; }
+	void GameService::setGameState(GameState new_state) 
+	{ 
+		current_state = new_state; 
+	}
 
-	GameState GameService::getGameState() { return current_state; }
+	GameState GameService::getGameState() 
+	{ 
+		return current_state; 
+	}
 }

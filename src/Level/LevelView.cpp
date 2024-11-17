@@ -168,6 +168,7 @@ namespace Level
 		case BlockType::TARGET:
 			return target_overlay_image;
 		}
+		
 		return nullptr;
 	}
 
