@@ -28,6 +28,7 @@ namespace Player
 	void PlayerController::update()
 	{
 		player_view->update();
+		readInput();
 	}
 
 	void PlayerController::render()

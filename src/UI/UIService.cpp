@@ -4,24 +4,15 @@
 #include "../../include/Global/ServiceLocator.h"
 #include "../../include/UI/UIElement/TextView.h"
 
-
-
 namespace UI
 {
-    using namespace Main;
-    using namespace SplashScreen;
-    using namespace MainMenu;
-    using namespace Credits;
-    using namespace Instructions;
-    using namespace Global;
-    using namespace UIElement;
-
     UIService::UIService()
     {
         splash_screen_ui_controller = nullptr;
         main_menu_ui_controller = nullptr;
         credits_screen_ui_controller = nullptr;
         instructions_ui_controller = nullptr;
+        gameplay_ui_controller = nullptr;
 
         createControllers();
     }
@@ -33,10 +24,11 @@ namespace UI
 
     void UIService::createControllers()
     {
-        splash_screen_ui_controller = new SplashScreenUIController();
-        main_menu_ui_controller = new MainMenuUIController();
-        credits_screen_ui_controller = new CreditsScreenUIController();
-        instructions_ui_controller = new InstructionsUIController();
+        splash_screen_ui_controller = new UI::SplashScreen::SplashScreenUIController();
+        main_menu_ui_controller = new UI::MainMenu::MainMenuUIController();
+        credits_screen_ui_controller = new UI::Credits::CreditsScreenUIController();
+        instructions_ui_controller = new UI::Instructions::InstructionsUIController();
+        gameplay_ui_controller = new UI::GameplayUI::GameplayUIController();
     }
 
     void UIService::initialize()
@@ -51,47 +43,54 @@ namespace UI
         main_menu_ui_controller->initialize();
         credits_screen_ui_controller->initialize();
         instructions_ui_controller->initialize();
+        gameplay_ui_controller->initialize();
     }
 
     void UIService::initializeUIElements()
     {
-        TextView::initializeTextView();
+        UI::UIElement::TextView::initializeTextView();
     }
 
     void UIService::update()
     {
-        switch (GameService::getGameState())
+        switch (Main::GameService::getGameState())
         {
-        case GameState::SPLASH_SCREEN:
+        case Main::GameState::SPLASH_SCREEN:
             splash_screen_ui_controller->update();
             break;
-        case GameState::MAIN_MENU:
+        case Main::GameState::MAIN_MENU:
             main_menu_ui_controller->update();
             break;
-        case GameState::INSTRUCTIONS:
+        case Main::GameState::INSTRUCTIONS:
             instructions_ui_controller->update();
             break;
-        case GameState::CREDITS:
+        case Main::GameState::CREDITS:
             credits_screen_ui_controller->update();
+            break;
+        case Main::GameState::GAMEPLAY:
+            gameplay_ui_controller->update();
             break;
         }
     }
 
     void UIService::render()
     {
-        switch (GameService::getGameState())
+        switch (Main::GameService::getGameState())
         {
-        case GameState::SPLASH_SCREEN:
+        case Main::GameState::SPLASH_SCREEN:
             splash_screen_ui_controller->render();
             break;
-        case GameState::MAIN_MENU:
+        case Main::GameState::MAIN_MENU:
             main_menu_ui_controller->render();
             break;
-        case GameState::INSTRUCTIONS:
+        case Main::GameState::INSTRUCTIONS:
             instructions_ui_controller->render();
             break;
-        case GameState::CREDITS:
+        case Main::GameState::CREDITS:
             credits_screen_ui_controller->render();
+            break;
+        case Main::GameState::GAMEPLAY:
+            gameplay_ui_controller->render();
             break;
         }
     }
@@ -103,9 +102,10 @@ namespace UI
 
     void UIService::onDestroy()
     {
-        delete(splash_screen_ui_controller);
-        delete(main_menu_ui_controller);
-        delete(credits_screen_ui_controller);
-        delete(instructions_ui_controller);
+        delete (splash_screen_ui_controller);
+        delete (main_menu_ui_controller);
+        delete (credits_screen_ui_controller);
+        delete (instructions_ui_controller);
+        delete (gameplay_ui_controller);
     }
 }

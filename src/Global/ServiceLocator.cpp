@@ -12,6 +12,7 @@ namespace Global
 		ui_service = nullptr;
 		level_service = nullptr;
 		player_service = nullptr;
+		gameplay_service = nullptr;
 
 		createServices();
 	}
@@ -23,9 +24,10 @@ namespace Global
 		graphic_service = new Graphics::GraphicService();
 		event_service = new Event::EventService();
 		sound_service = new Sound::SoundService();
-		ui_service = new UI::UIService();
 		level_service = new Level::LevelService();
 		player_service = new Player::PlayerService();
+		gameplay_service = new Gameplay::GameplayService();
+		ui_service = new UI::UIService();
 	}
 
 	void ServiceLocator::initialize()
@@ -33,44 +35,50 @@ namespace Global
 		graphic_service->initialize();
 		event_service->initialize();
 		sound_service->initialize();
-		ui_service->initialize();
 		level_service->intialize();
 		player_service->initialize();
+		gameplay_service->intialize();
+		ui_service->initialize();
 	}
 
 	void ServiceLocator::update()
 	{
 		graphic_service->update();
 		event_service->update();
-		ui_service->update();
 
 		if (Main::GameService::getGameState() == Main::GameState::GAMEPLAY)
 		{
 			level_service->update();
 			player_service->update();
+			gameplay_service->update();
 		}
+
+		ui_service->update();
 	}
 
 	void ServiceLocator::render()
 	{
 		graphic_service->render();
-		ui_service->render();
 
 		if (Main::GameService::getGameState() == Main::GameState::GAMEPLAY)
 		{
 			level_service->render();
 			player_service->render();
+			gameplay_service->render();
 		}
+
+		ui_service->render();
 	}
 
 	void ServiceLocator::clearAllServices()
 	{
-		delete(graphic_service);
-		delete(event_service);
-		delete(sound_service);
-		delete(ui_service);
-		delete(level_service);
-		delete(player_service);
+		delete (graphic_service);
+		delete (event_service);
+		delete (sound_service);
+		delete (level_service);
+		delete (player_service);
+		delete (gameplay_service);
+		delete (ui_service);
 	}
 
 	ServiceLocator* ServiceLocator::getInstance()
@@ -90,4 +98,6 @@ namespace Global
 	Level::LevelService* ServiceLocator::getLevelService() { return level_service; }
 
 	Player::PlayerService* ServiceLocator::getPlayerService() { return player_service; }
+
+	Gameplay::GameplayService* ServiceLocator::getGameplayService() { return gameplay_service; }
 }
