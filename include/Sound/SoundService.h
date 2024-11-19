@@ -10,6 +10,7 @@ namespace Sound
 		JUMP,
 		DEATH,
 		LEVEL_COMPLETE,
+		GAME_WON
 	};
 
 	class SoundService

@@ -10,12 +10,6 @@ namespace UI
 {
     namespace MainMenu
     {
-        using namespace Global;
-        using namespace Graphics;
-        using namespace Main;
-        using namespace UIElement;
-        using namespace Sound;
-
         MainMenuUIController::MainMenuUIController()
         {
             createImage();
@@ -29,14 +23,14 @@ namespace UI
 
         void MainMenuUIController::createImage()
         {
-            background_image = new ImageView();
+            background_image = new UI::UIElement::ImageView();
         }
 
         void MainMenuUIController::createButtons()
         {
-            play_button = new ButtonView();
-            instructions_button = new ButtonView();
-            quit_button = new ButtonView();
+            play_button = new UI::UIElement::ButtonView();
+            instructions_button = new UI::UIElement::ButtonView();
+            quit_button = new UI::UIElement::ButtonView();
         }
 
         void MainMenuUIController::initialize()
@@ -48,17 +42,17 @@ namespace UI
 
         void MainMenuUIController::initializeBackgroundImage()
         {
-            sf::RenderWindow* game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
+            sf::RenderWindow* game_window = Global::ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
 
-            background_image->initialize(Config::array_jumper_bg_texture_path, game_window->getSize().x, game_window->getSize().y, sf::Vector2f(0, 0));
+            background_image->initialize(Global::Config::array_jumper_bg_texture_path, game_window->getSize().x, game_window->getSize().y, sf::Vector2f(0, 0));
             background_image->setImageAlpha(background_alpha);
         }
 
         void MainMenuUIController::initializeButtons()
         {
-            play_button->initialize("Play Button", Config::play_button_texture_path, button_width, button_height, sf::Vector2f(0, play_button_y_position));
-            instructions_button->initialize("Instructions Button", Config::instructions_button_texture_path, button_width, button_height, sf::Vector2f(0, instructions_button_y_position));
-            quit_button->initialize("Quit Button", Config::quit_button_texture_path, button_width, button_height, sf::Vector2f(0, quit_button_y_position));
+            play_button->initialize("Play Button", Global::Config::play_button_texture_path, button_width, button_height, sf::Vector2f(0, play_button_y_position));
+            instructions_button->initialize("Instructions Button", Global::Config::instructions_button_texture_path, button_width, button_height, sf::Vector2f(0, instructions_button_y_position));
+            quit_button->initialize("Quit Button", Global::Config::quit_button_texture_path, button_width, button_height, sf::Vector2f(0, quit_button_y_position));
 
             play_button->setCentreAlinged();
             instructions_button->setCentreAlinged();
@@ -74,19 +68,19 @@ namespace UI
 
         void MainMenuUIController::playButtonCallback()
         {
-            ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::GAMEPLAY);
+            Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::BUTTON_CLICK);
+            Global::ServiceLocator::getInstance()->getGameplayService()->startGame();
         }
 
         void MainMenuUIController::instructionsButtonCallback()
         {
-            ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::INSTRUCTIONS);
+            Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::BUTTON_CLICK);
+            Main::GameService::setGameState(Main::GameState::INSTRUCTIONS);
         }
 
         void MainMenuUIController::quitButtonCallback()
         {
-            ServiceLocator::getInstance()->getGraphicService()->getGameWindow()->close();
+            Global::ServiceLocator::getInstance()->getGraphicService()->getGameWindow()->close();
         }
 
         void MainMenuUIController::update()
