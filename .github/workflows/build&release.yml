@@ -67,21 +67,21 @@ jobs:
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: sfml-project-windows
+          name: Array-Jumper-windows
           path: ${{ github.workspace }}/build/Array-Jumper-windows.zip
 
       - name: Upload macOS Build
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: sfml-project-macos
+          name: Array-Jumper-macos
           path: ${{ github.workspace }}/build/Array-Jumper-macos.zip
 
       - name: Upload Linux Build
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: sfml-project-linux
+          name: Array-Jumper-linux
           path: ${{ github.workspace }}/build/Array-Jumper-linux.zip
 
   release:
