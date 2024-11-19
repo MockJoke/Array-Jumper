@@ -11,6 +11,10 @@ namespace Gameplay
 		void processObstacle();
 		void processEndBlock();
 
+		bool isLastLevel();
+		void loadNextLevel();
+
+		void gameWon();
 		void gameOver();
 
 	public:
@@ -18,6 +22,7 @@ namespace Gameplay
 		void update();
 		void render();
 
+		void startGame();
 		void onPositionChanged(int position);
 		void onDeath();
 	};

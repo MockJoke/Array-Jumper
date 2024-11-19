@@ -50,4 +50,3 @@ namespace Level
 		BoxDimensions getBoxDimensions();
 	};
 }
-
